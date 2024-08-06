@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Service</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h2>Car Rental Service</h2>
+        <div id="userMenu" class="user-menu" style="display:none;">
+            <span id="usernameDisplay"></span>
+            <div id="userOptions" class="user-options">
+                <button id="logoutButton">Log Out</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <aside id="cancelSidebar" style="display:none;">
+            <button id="payBillButton">Pay Bill</button>
+            <button id="cancelReservationButton">Cancel Reservation</button>
+        </aside>
+
+        <!-- Login Form -->
+        <form id="loginForm" aria-labelledby="loginFormHeading">
+            <h1 id="loginFormHeading">Login</h1>
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required aria-required="true"
+                       placeholder="Enter your username">
+                <span class="error-message" id="usernameError">Username is required</span>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required aria-required="true"
+                       placeholder="Enter your password">
+                <span class="error-message" id="passwordError">Password is required</span>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Welcome Page -->
+        <div id="welcomePage" style="display:none;">
+            <div class="welcome-content">
+                <h1>Welcome to Car Rental Service</h1>
+                <p>
+                    Car Rental Service is a leading facility for renting affordable electric cars. We offer the best rates
+                    and top-notch customer service to ensure you have a smooth and enjoyable rental experience.
+                </p>
+                <button id="getStartedButton">Let's get started</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" style="display:none;">
+            <!-- Selection Box -->
+            <div id="selectionBox">
+                <h1>Search for a Car</h1>
+                <form id="searchForm">
+                    <div>
+                        <label for="location">Pick-up location:</label>
+                        <select id="location" name="location" required>
+                            <option value="clementi">Clementi</option>
+                            <option value="changi">Changi</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="pickupDate">Pick-up date:</label>
+                        <input type="date" id="pickupDate" name="pickupDate" required>
+                    </div>
+                    <div>
+                        <label for="pickupTime">Time:</label>
+                        <input type="time" id="pickupTime" name="pickupTime" required>
+                    </div>
+                    <div>
+                        <label for="dropoffDate">Drop-off date:</label>
+                        <input type="date" id="dropoffDate" name="dropoffDate" required>
+                    </div>
+                    <div>
+                        <label for="dropoffTime">Time:</label>
+                        <input type="time" id="dropoffTime" name="dropoffTime" required>
+                    </div>
+                    <button type="submit">Search</button>
+                    <button type="button" id="skipSearchButton">Go to Main Page</button>
+                </form>
+            </div>
+
+            <!-- Car Type Selection -->
+            <div id="carTypeSelection" style="display:none;">
+                <button class="carTypeButton" data-type="small">Small Car</button>
+                <button class="carTypeButton" data-type="large">Large Car</button>
+                <button class="carTypeButton" data-type="suv">SUV</button>
+                <button class="carTypeButton" data-type="premium">Premium Car</button>
+            </div>
+
+            <h1 id="availableCarsHeader" style="display:none;">Available Cars</h1>
+            <div class="car-list" id="carList" style="display:none;">
+                <!-- Car items will be populated here using JavaScript -->
+            </div>
+
+            <div class="car-details" id="carDetails" style="display:none;">
+                <h2 id="carName"></h2>
+                <img id="carImage" src="" alt="Car Image">
+                <p id="carDescription"></p>
+                <button id="reserveButton">Reserve This Car</button>
+            </div>
+
+            <form id="reservationForm" style="display:none;">
+                <h1>Reserve a Car</h1>
+                <div>
+                    <label for="creditCardNumber">Credit Card Number:</label>
+                    <input type="text" id="creditCardNumber" name="creditCardNumber" required>
+                </div>
+                <button type="submit">Complete Reservation</button>
+            </form>
+
+            <div id="reservationComplete" style="display:none;">
+                <h1>Reservation Complete</h1>
+                <p>
+                    Thank you for reserving a car with us! Your reference number is <span id="referenceNumber"></span>.
+                </p>
+            </div>
+        </div>
+
+        <!-- Cancel Reservation Page -->
+        <div id="cancelPage" style="display:none;">
+            <form id="cancelReservationForm">
+                <h1>Cancel Reservation</h1>
+                <div>
+                    <label for="cancelReferenceNumber">Reference Number:</label>
+                    <input type="text" id="cancelReferenceNumber" name="cancelReferenceNumber" required>
+                </div>
+                <button type="submit">Cancel Reservation</button>
+            </form>
+            <div id="cancelAcknowledgement" style="display:none;">
+                <h1>Thank You!</h1>
+                <p>Thank you for using our service.</p>
+            </div>
+        </div>
+
+        <!-- Pay Bill Page -->
+        <div id="payBillPage" style="display:none;">
+            <form id="payBillForm">
+                <h1>Pay Bill</h1>
+                <div>
+                    <label for="payBillReferenceNumber">Reference Number:</label>
+                    <input type="text" id="payBillReferenceNumber" name="payBillReferenceNumber" required>
+                </div>
+                <div>
+                    <label for="creditCardNumberPay">Credit Card Number:</label>
+                    <input type="text" id="creditCardNumberPay" name="creditCardNumberPay" required>
+                </div>
+                <button type="submit">Pay Bill</button>
+            </form>
+            <div id="payBillAcknowledgement" style="display:none;">
+                <h1>Payment Completed</h1>
+                <p>Thank you for using our service. We hope to see you again!</p>
+            </div>
+        </div>
+
+        <div class="loading-spinner" id="loadingSpinner"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Car Rental Service. All rights reserved.</p>
+    </footer>
+
+    <script src="script1.js"></script>
+    <script src="script2.js"></script>
+    <script src="script3.js"></script>
+</body>
+
+</html>
